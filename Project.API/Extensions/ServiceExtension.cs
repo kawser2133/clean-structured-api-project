@@ -8,7 +8,7 @@ using Project.Core.Mapper;
 using Project.Core.Services;
 using Project.Infrastructure.Repositories;
 
-namespace Project.UI.Extensions
+namespace Project.API.Extensions
 {
     public static class ServiceExtension
     {
