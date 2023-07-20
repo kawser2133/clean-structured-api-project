@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Project.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using Project.Infrastructure.Data;
 namespace Project.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230703085651_Initial_Migration")]
+    partial class Initial_Migration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -257,88 +260,6 @@ namespace Project.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Products");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Code = "P001",
-                            IsActive = true,
-                            Name = "Product 1",
-                            Price = 9.99f
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Code = "P002",
-                            IsActive = true,
-                            Name = "Product 2",
-                            Price = 12f
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Code = "P003",
-                            IsActive = true,
-                            Name = "Product 3",
-                            Price = 13f
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Code = "P004",
-                            IsActive = true,
-                            Name = "Product 4",
-                            Price = 14f
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Code = "P005",
-                            IsActive = true,
-                            Name = "Product 5",
-                            Price = 15f
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Code = "P006",
-                            IsActive = true,
-                            Name = "Product 6",
-                            Price = 16f
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Code = "P007",
-                            IsActive = true,
-                            Name = "Product 7",
-                            Price = 17f
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Code = "P008",
-                            IsActive = true,
-                            Name = "Product 8",
-                            Price = 18f
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Code = "P009",
-                            IsActive = true,
-                            Name = "Product 9",
-                            Price = 19f
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Code = "P010",
-                            IsActive = true,
-                            Name = "Product 10",
-                            Price = 19.99f
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

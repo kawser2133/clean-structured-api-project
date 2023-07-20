@@ -3,12 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
-
 namespace Project.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class Initial_Migration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -175,23 +173,6 @@ namespace Project.Infrastructure.Migrations
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.InsertData(
-                table: "Products",
-                columns: new[] { "Id", "Code", "Description", "EntryDate", "IsActive", "Name", "Price", "UpdateDate" },
-                values: new object[,]
-                {
-                    { 1, "P001", null, null, true, "Product 1", 9.99f, null },
-                    { 2, "P002", null, null, true, "Product 2", 12f, null },
-                    { 3, "P003", null, null, true, "Product 3", 13f, null },
-                    { 4, "P004", null, null, true, "Product 4", 14f, null },
-                    { 5, "P005", null, null, true, "Product 5", 15f, null },
-                    { 6, "P006", null, null, true, "Product 6", 16f, null },
-                    { 7, "P007", null, null, true, "Product 7", 17f, null },
-                    { 8, "P008", null, null, true, "Product 8", 18f, null },
-                    { 9, "P009", null, null, true, "Product 9", 19f, null },
-                    { 10, "P010", null, null, true, "Product 10", 19.99f, null }
                 });
 
             migrationBuilder.CreateIndex(
