@@ -84,4 +84,4 @@ I want you to know that contributions to this project are welcome. Please open a
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE)."
+This project is licensed under the [MIT License](LICENSE).
