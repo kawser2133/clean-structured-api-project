@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Project.API.Middlewares;
 using Project.Infrastructure.Data;
 using Project.UI.Extensions;
 
@@ -11,8 +12,14 @@ builder.Services.AddDbContext<ApplicationDbContext>(
 builder.Services.RegisterService();
 builder.Services.AddControllers();
 
+// Register ILogger service
+builder.Services.AddLogging();
+
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+    {
+        options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Clean Structured API Project", Version = "v1" });
+    });
 
 var app = builder.Build();
 
@@ -24,5 +31,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.MapControllers();
+#region Custom Middleware
+
+app.UseRequestResponseLogging();
+#endregion
 
 app.Run();
