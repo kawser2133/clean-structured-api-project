@@ -1,6 +1,6 @@
 # Clean Structured API Project - ASP.NET Core
 
-This template is for a clean structured ASP.NET Core API project, following the Clean Architecture principles, SOLID design principles, implementing the Dependency Injection, Repository, and Unit of Work design pattern, and utilizing Entity Framework Core for data access. It provides a standardized structure and organization for building robust and maintainable ASP.NET Core API applications with complete CRUD (Create, Read, Update, Delete) operations.
+This template is for a clean structured ASP.NET Core API project, following the RESTful principles, Clean Architecture principles, SOLID design principles, implementing the Dependency Injection, Repository, and Unit of Work design pattern, and utilizing Entity Framework Core for data access. It provides a standardized structure and organization for building robust and maintainable ASP.NET Core API applications with complete CRUD (Create, Read, Update, Delete) operations.
 
 ## Project Structure
 
@@ -8,9 +8,9 @@ The project structure is designed to promote separation of concerns and modulari
 
 ```
 ├── src
-│   ├── Core                    # Contains the core business logic and domain models, etc.
+│   ├── Core                    # Contains the core business logic and domain models, view models, etc.
 │   ├── Infrastructure          # Contains infrastructure concerns such as data access, external services, etc.
-│   └── API                      # Contains the API layer, including controllers, models, and extensions, etc.
+│   └── API                      # Contains the API layer, including controllers, extensions, etc.
 ├── tests
 │   ├── Core.Tests              # Contains unit tests for the core layer
 │   ├── Infrastructure.Tests    # Contains unit tests for the infrastructure layer
@@ -84,4 +84,4 @@ I want you to know that contributions to this project are welcome. Please open a
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE)."
+This project is licensed under the [MIT License](LICENSE).
