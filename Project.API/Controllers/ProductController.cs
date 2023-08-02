@@ -18,7 +18,7 @@ namespace Project.API.Controllers
         }
 
 
-        // GET: api/product
+        // GET: api/product/paginated
         [HttpGet("paginated")]
         public async Task<IActionResult> Get(int? pageNumber, int? pageSize)
         {

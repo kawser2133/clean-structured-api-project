@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Project.API.Middlewares;
 using Project.Infrastructure.Data;
-using Project.UI.Extensions;
+using Project.API.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +9,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(
                 options => options.UseSqlServer(builder.Configuration
                 .GetConnectionString("PrimaryDbConnection")));
 
+//Register Services
 builder.Services.RegisterService();
 builder.Services.AddControllers();
 
