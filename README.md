@@ -2,6 +2,9 @@
 
 This template is for a clean structured ASP.NET Core API project, following the RESTful principles, Clean Architecture principles, SOLID design principles, implementing the Dependency Injection, Repository, and Unit of Work design pattern, and utilizing Entity Framework Core for data access. It provides a standardized structure and organization for building robust and maintainable ASP.NET Core API applications with complete CRUD (Create, Read, Update, Delete) operations.
 
+#### Reference
+You can visit my blog post- [Clean Structured API Project – ASP.NET Core](https://binarybytez.com/clean-structured-api-project/)
+
 ## Project Structure
 
 The project structure is designed to promote separation of concerns and modularity, making it easier to understand, test, and maintain the application.
