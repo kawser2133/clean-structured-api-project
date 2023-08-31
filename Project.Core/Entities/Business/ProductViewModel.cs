@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project.Core.Entities.General
+namespace Project.Core.Entities.Business
 {
     public class ProductViewModel
     {
@@ -16,6 +16,7 @@ namespace Project.Core.Entities.General
         public string Name { get; set; } = string.Empty;
         [Required, Range(0.01, float.MaxValue)]
         public float Price { get; set; }
+        public int Quantity { get; set; }
         [StringLength(maximumLength: 350)]
         public string? Description { get; set; }
         public bool IsActive { get; set; }

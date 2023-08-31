@@ -10,7 +10,7 @@ namespace Project.Infrastructure.Repositories
     //Unit of Work Pattern
     public class BaseRepository<T> : IBaseRepository<T> where T : class
     {
-        private readonly ApplicationDbContext _dbContext;
+        protected readonly ApplicationDbContext _dbContext;
         protected DbSet<T> DbSet => _dbContext.Set<T>();
 
         public BaseRepository(ApplicationDbContext dbContext)
@@ -20,9 +20,13 @@ namespace Project.Infrastructure.Repositories
 
         public async Task<IEnumerable<T>> GetAll()
         {
-            return await _dbContext.Set<T>().AsNoTracking().ToListAsync();
+            var data = await _dbContext.Set<T>()
+                .AsNoTracking()
+                .ToListAsync();
+
+            return data;
         }
-       
+
         public async Task<PaginatedDataViewModel<T>> GetPaginatedData(int pageNumber, int pageSize)
         {
             var query = _dbContext.Set<T>()

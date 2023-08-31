@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace Project.Core.Interfaces.IRepositories
 {
-    public interface IProductRepository : IBaseRepository<Product>
+    public interface ICustomerRepository : IBaseRepository<Customer>
     {
-        Task<float> PriceCheck(int productId);
     }
 }

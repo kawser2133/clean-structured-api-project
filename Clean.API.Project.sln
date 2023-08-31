@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project.Infrastructure", "P
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project.UnitTest", "Project.UnitTest\Project.UnitTest.csproj", "{9A138398-C199-404D-9E42-3095A2290A07}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project.API", "Project.API\Project.API.csproj", "{E80FE11C-4A4B-456B-A79A-9201F5A11060}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project.API", "Project.API\Project.API.csproj", "{E80FE11C-4A4B-456B-A79A-9201F5A11060}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

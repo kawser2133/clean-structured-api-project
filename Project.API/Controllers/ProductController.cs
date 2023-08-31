@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Project.Core.Entities.General;
+using Project.Core.Entities.Business;
 using Project.Core.Interfaces.IServices;
 
 namespace Project.API.Controllers
@@ -163,6 +163,21 @@ namespace Project.API.Controllers
             {
                 _logger.LogError(ex, "An error occurred while deleting the product");
                 return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while deleting the product- " + ex.Message);
+            }
+        }
+
+        [HttpGet("PriceCheck/{productId}")]
+        public async Task<IActionResult> PriceCheck(int productId)
+        {
+            try
+            {
+                var price = await _productService.PriceCheck(productId);
+                return Ok(price);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while checking product price");
+                return StatusCode(StatusCodes.Status500InternalServerError, $"An error occurred while checking product price- {ex.Message}");
             }
         }
 

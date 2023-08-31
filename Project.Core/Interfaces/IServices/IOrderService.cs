@@ -8,17 +8,15 @@ using System.Threading.Tasks;
 
 namespace Project.Core.Interfaces.IServices
 {
-    public interface IProductService
+    public interface IOrderService
     {
-        Task<IEnumerable<ProductViewModel>> GetProducts();
-        Task<PaginatedDataViewModel<ProductViewModel>> GetPaginatedProducts(int pageNumber, int pageSize);
-        Task<ProductViewModel> GetProduct(int id);
+        Task<IEnumerable<OrderViewModel>> GetOrders();
+        Task<PaginatedDataViewModel<OrderViewModel>> GetPaginatedOrders(int pageNumber, int pageSize);
+        Task<OrderViewModel> GetOrder(int id);
         Task<bool> IsExists(string key, string value);
         Task<bool> IsExistsForUpdate(int id, string key, string value);
-        Task<ProductViewModel> Create(ProductViewModel model);
-        Task Update(ProductViewModel model);
+        Task<OrderViewModel> Create(OrderViewModel model);
+        Task Update(OrderViewModel model);
         Task Delete(int id);
-        Task<float> PriceCheck(int productId);
-
     }
 }

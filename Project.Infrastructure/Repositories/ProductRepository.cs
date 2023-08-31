@@ -1,4 +1,5 @@
-﻿using Project.Core.Entities.General;
+﻿using Microsoft.EntityFrameworkCore;
+using Project.Core.Entities.General;
 using Project.Core.Interfaces.IRepositories;
 using Project.Infrastructure.Data;
 using System;
@@ -13,6 +14,15 @@ namespace Project.Infrastructure.Repositories
     {
         public ProductRepository(ApplicationDbContext dbContext) : base(dbContext)
         {
+        }
+
+        public async Task<float> PriceCheck(int productId)
+        {
+            var price = await _dbContext.Products
+                .Where(x => x.Id == productId)
+                .Select(x => x.Price)
+                .FirstOrDefaultAsync();
+            return price;
         }
 
     }

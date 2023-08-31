@@ -6,20 +6,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project.Core.Entities.General
+namespace Project.Core.Entities.Business
 {
-    [Table("Products")]
-    public class Product : Base<int>
+    public class OrderDetailsViewModel
     {
-        [Required, StringLength(maximumLength: 8, MinimumLength = 2)]
-        public string? Code { get; set; }
-        [Required, StringLength(maximumLength: 100, MinimumLength = 2)]
-        public string? Name { get; set; }
+        public int OrderId { get; set; }
+        public int ProductId { get; set; }
         [Required]
         public float Price { get; set; }
+        [Required]
         public int Quantity { get; set; }
         [StringLength(maximumLength: 350)]
         public string? Description { get; set; }
-        public bool IsActive { get; set; }
     }
 }

@@ -37,12 +37,12 @@ namespace Project.Core.Services
         {
             //Get peginated data
             var paginatedData = await _productRepository.GetPaginatedData(pageNumber, pageSize);
-            
+
             //Map data with ViewModel
             var mappedData = _productViewModelMapper.MapList(paginatedData.Data);
 
             var paginatedDataViewModel = new PaginatedDataViewModel<ProductViewModel>(mappedData.ToList(), paginatedData.TotalCount);
-            
+
             return paginatedDataViewModel;
         }
 
@@ -89,6 +89,11 @@ namespace Project.Core.Services
         {
             var entity = await _productRepository.GetById(id);
             await _productRepository.Delete(entity);
+        }
+
+        public async Task<float> PriceCheck(int productId)
+        {
+            return await _productRepository.PriceCheck(productId);
         }
 
     }

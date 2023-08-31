@@ -8,18 +8,24 @@ using System.Threading.Tasks;
 
 namespace Project.Core.Entities.General
 {
-    [Table("Products")]
-    public class Product : Base<int>
+    [Table("OrderDetails")]
+    public class OrderDetails : Base<int>
     {
-        [Required, StringLength(maximumLength: 8, MinimumLength = 2)]
-        public string? Code { get; set; }
-        [Required, StringLength(maximumLength: 100, MinimumLength = 2)]
-        public string? Name { get; set; }
+        [Required]
+        public int OrderId { get; set; }
+        [Required]
+        public int ProductId { get; set; }
         [Required]
         public float Price { get; set; }
+        [Required]
         public int Quantity { get; set; }
         [StringLength(maximumLength: 350)]
         public string? Description { get; set; }
-        public bool IsActive { get; set; }
+
+        [ForeignKey(nameof(ProductId))]
+        public virtual Product Product { get; set; }
+        [ForeignKey(nameof(OrderId))]
+        public virtual Order Order { get; set; }
+
     }
 }
