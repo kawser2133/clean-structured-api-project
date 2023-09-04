@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Project.Core.Entities.General
 {
+    //Customer Table added for correlational things sharing
     [Table("Customers")]
     public class Customer : Base<int>
     {
