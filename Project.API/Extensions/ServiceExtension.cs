@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
+using Project.Core.Entities.Business;
 using Project.Core.Entities.General;
 using Project.Core.Interfaces.IMapper;
 using Project.Core.Interfaces.IRepositories;
