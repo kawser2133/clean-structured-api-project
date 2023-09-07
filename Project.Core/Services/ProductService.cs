@@ -66,7 +66,6 @@ namespace Project.Core.Services
             //Mapping through AutoMapper
             var entity = _productMapper.MapModel(model);
             entity.EntryDate = DateTime.Now;
-
             return _productViewModelMapper.MapModel(await _productRepository.Create(entity));
         }
 

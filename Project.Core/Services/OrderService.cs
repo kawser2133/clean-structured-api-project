@@ -17,15 +17,18 @@ namespace Project.Core.Services
         private readonly IBaseMapper<Order, OrderViewModel> _orderViewModelMapper;
         private readonly IBaseMapper<OrderViewModel, Order> _orderMapper;
         private readonly IOrderRepository _orderRepository;
+        private readonly IOrderDetailsRepository _orderDetailsRepository;
 
         public OrderService(
             IBaseMapper<Order, OrderViewModel> orderViewModelMapper,
             IBaseMapper<OrderViewModel, Order> orderMapper,
-            IOrderRepository orderRepository)
+            IOrderRepository orderRepository,
+            IOrderDetailsRepository orderDetailsRepository)
         {
             _orderMapper = orderMapper;
             _orderViewModelMapper = orderViewModelMapper;
             _orderRepository = orderRepository;
+            _orderDetailsRepository = orderDetailsRepository;
         }
 
         public async Task<IEnumerable<OrderViewModel>> GetOrders()
@@ -63,11 +66,34 @@ namespace Project.Core.Services
 
         public async Task<OrderViewModel> Create(OrderViewModel model)
         {
-            //Mapping through AutoMapper
-            var entity = _orderMapper.MapModel(model);
-            entity.EntryDate = DateTime.Now;
+            //Manual mapping
+            var order = new Order
+            {
+                CustomerId = model.CustomerId,
+                TotalBill = model.TotalBill,
+                TotalQuantity = model.TotalQuantity,
+                ProcessingData = model.ProcessingData,
+                Description = model.Description,
+                EntryDate = DateTime.Now
+            };
+            var orderData = await _orderRepository.Create(order);
+            var orderDetails = new List<OrderDetails>();
 
-            return _orderViewModelMapper.MapModel(await _orderRepository.Create(entity));
+            foreach (var item in model.OrderDetails)
+            {
+                orderDetails.Add(new OrderDetails
+                {
+                    OrderId = orderData.Id,
+                    ProductId = item.ProductId,
+                    Price = item.Price,
+                    Quantity = item.Quantity,
+                    Description = item.Description,
+                    EntryDate = DateTime.Now
+                });
+            }
+            await _orderDetailsRepository.CreateRange(orderDetails);
+
+            return _orderViewModelMapper.MapModel(orderData);
         }
 
         public async Task Update(OrderViewModel model)

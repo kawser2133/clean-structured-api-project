@@ -84,6 +84,12 @@ namespace Project.Infrastructure.Repositories
             return model;
         }
 
+        public async Task CreateRange(List<T> model)
+        {
+            await _dbContext.Set<T>().AddRangeAsync(model);
+            await _dbContext.SaveChangesAsync();
+        }
+
         public async Task Update(T model)
         {
             _dbContext.Set<T>().Update(model);

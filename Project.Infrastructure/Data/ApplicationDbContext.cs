@@ -18,6 +18,9 @@ namespace Project.Infrastructure.Data
 
         #region DbSet Section
         public DbSet<Product> Products { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderDetails> OrderDetails { get; set; }
 
         #endregion
 

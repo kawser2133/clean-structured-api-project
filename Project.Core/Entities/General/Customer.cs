@@ -12,9 +12,9 @@ namespace Project.Core.Entities.General
     [Table("Customers")]
     public class Customer : Base<int>
     {
-        [Required, StringLength(maximumLength: 100, MinimumLength = 10)]
+        [Required, StringLength(maximumLength: 100, MinimumLength = 2)]
         public string FullName { get; set; } = string.Empty;
-        [Required, DataType(DataType.EmailAddress), StringLength(maximumLength: 100, MinimumLength = 10)]
+        [Required, DataType(DataType.EmailAddress), StringLength(maximumLength: 100, MinimumLength = 5)]
         public string Email { get; set; } = string.Empty;
     }
 }
