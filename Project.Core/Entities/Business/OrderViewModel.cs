@@ -13,7 +13,7 @@ namespace Project.Core.Entities.Business
         public int Id { get; set; }
         [Required]
         public int CustomerId { get; set; }
-        public float TotalBill { get; set; }
+        public double TotalBill { get; set; }
         public int TotalQuantity { get; set; }
         public DateTime ProcessingData { get; set; }
         [StringLength(maximumLength: 350)]

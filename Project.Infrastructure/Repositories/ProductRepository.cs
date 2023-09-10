@@ -16,7 +16,7 @@ namespace Project.Infrastructure.Repositories
         {
         }
 
-        public async Task<float> PriceCheck(int productId)
+        public async Task<double> PriceCheck(int productId)
         {
             var price = await _dbContext.Products
                 .Where(x => x.Id == productId)

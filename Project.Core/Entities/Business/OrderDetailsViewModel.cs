@@ -13,7 +13,7 @@ namespace Project.Core.Entities.Business
         public int OrderId { get; set; }
         public int ProductId { get; set; }
         [Required]
-        public float Price { get; set; }
+        public double SellingPrice { get; set; }
         [Required]
         public int Quantity { get; set; }
         [StringLength(maximumLength: 350)]

@@ -90,7 +90,7 @@ namespace Project.Core.Services
             await _productRepository.Delete(entity);
         }
 
-        public async Task<float> PriceCheck(int productId)
+        public async Task<double> PriceCheck(int productId)
         {
             return await _productRepository.PriceCheck(productId);
         }

@@ -14,7 +14,7 @@ namespace Project.Core.Entities.General
         [Required]
         public int CustomerId { get; set; }
         [Required]
-        public float TotalBill { get; set; }
+        public double TotalBill { get; set; }
         [Required]
         public int TotalQuantity { get; set; }
         [Required]

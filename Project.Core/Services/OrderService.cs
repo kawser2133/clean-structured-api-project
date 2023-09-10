@@ -85,7 +85,7 @@ namespace Project.Core.Services
                 {
                     OrderId = orderData.Id,
                     ProductId = item.ProductId,
-                    Price = item.Price,
+                    SellingPrice = item.SellingPrice,
                     Quantity = item.Quantity,
                     Description = item.Description,
                     EntryDate = DateTime.Now

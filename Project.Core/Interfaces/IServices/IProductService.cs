@@ -18,7 +18,7 @@ namespace Project.Core.Interfaces.IServices
         Task<ProductViewModel> Create(ProductViewModel model);
         Task Update(ProductViewModel model);
         Task Delete(int id);
-        Task<float> PriceCheck(int productId);
+        Task<double> PriceCheck(int productId);
 
     }
 }

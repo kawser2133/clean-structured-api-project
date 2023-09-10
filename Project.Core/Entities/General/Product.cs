@@ -16,7 +16,7 @@ namespace Project.Core.Entities.General
         [Required, StringLength(maximumLength: 100, MinimumLength = 2)]
         public string? Name { get; set; }
         [Required]
-        public float Price { get; set; }
+        public double Price { get; set; }
         public int Quantity { get; set; }
         [StringLength(maximumLength: 350)]
         public string? Description { get; set; }

@@ -9,6 +9,6 @@ namespace Project.Core.Interfaces.IRepositories
 {
     public interface IProductRepository : IBaseRepository<Product>
     {
-        Task<float> PriceCheck(int productId);
+        Task<double> PriceCheck(int productId);
     }
 }
