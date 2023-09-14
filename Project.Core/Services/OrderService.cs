@@ -51,7 +51,10 @@ namespace Project.Core.Services
 
         public async Task<OrderViewModel> GetOrder(int id)
         {
-            return _orderViewModelMapper.MapModel(await _orderRepository.GetById(id));
+            //var orderData = await _orderRepository.GetById(id);
+            //return _orderViewModelMapper.MapModel(orderData);
+
+            return await _orderRepository.GetOrderById(id);
         }
 
         public async Task<bool> IsExists(string key, string value)

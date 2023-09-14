@@ -1,4 +1,5 @@
-﻿using Project.Core.Entities.General;
+﻿using Project.Core.Entities.Business;
+using Project.Core.Entities.General;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,6 @@ namespace Project.Core.Interfaces.IRepositories
 {
     public interface IOrderRepository : IBaseRepository<Order>
     {
+        Task<OrderViewModel> GetOrderById(int id);
     }
 }
