@@ -13,12 +13,13 @@ namespace Project.Core.Entities.Business
         public int Id { get; set; }
         [Required]
         public int CustomerId { get; set; }
+        public string? CustomerName { get; set; }
         public double TotalBill { get; set; }
         public int TotalQuantity { get; set; }
         public DateTime ProcessingData { get; set; }
         [StringLength(maximumLength: 350)]
         public string? Description { get; set; }
 
-        public List<OrderDetailsViewModel> OrderDetails { get; set; }
+        public List<OrderDetailsViewModel>? OrderDetails { get; set; }
     }
 }

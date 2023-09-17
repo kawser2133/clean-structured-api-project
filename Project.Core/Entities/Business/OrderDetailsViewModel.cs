@@ -11,7 +11,9 @@ namespace Project.Core.Entities.Business
     public class OrderDetailsViewModel
     {
         public int OrderId { get; set; }
+        [Required]
         public int ProductId { get; set; }
+        public string? ProductName { get; set; }
         [Required]
         public double SellingPrice { get; set; }
         [Required]
