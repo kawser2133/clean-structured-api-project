@@ -15,7 +15,7 @@ namespace Project.Core.Entities.Business
         public int ProductId { get; set; }
         public string? ProductName { get; set; }
         [Required]
-        public double SellingPrice { get; set; }
+        public decimal SellingPrice { get; set; }
         [Required]
         public int Quantity { get; set; }
         [StringLength(maximumLength: 350)]

@@ -14,7 +14,7 @@ namespace Project.Core.Entities.General
         [Required]
         public int CustomerId { get; set; }
         [Required]
-        public double TotalBill { get; set; }
+        public decimal TotalBill { get; set; }
         [Required]
         public int TotalQuantity { get; set; }
         [Required]

@@ -14,7 +14,7 @@ namespace Project.Core.Entities.Business
         [Required]
         public int CustomerId { get; set; }
         public string? CustomerName { get; set; }
-        public double TotalBill { get; set; }
+        public decimal TotalBill { get; set; }
         public int TotalQuantity { get; set; }
         public DateTime ProcessingData { get; set; }
         [StringLength(maximumLength: 350)]
