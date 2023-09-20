@@ -27,7 +27,7 @@ namespace Project.Infrastructure.Repositories
             return data;
         }
 
-        public async Task<PaginatedDataViewModel<T>> GetPaginatedData(int pageNumber, int pageSize)
+        public virtual async Task<PaginatedDataViewModel<T>> GetPaginatedData(int pageNumber, int pageSize)
         {
             var query = _dbContext.Set<T>()
                 .Skip((pageNumber - 1) * pageSize)

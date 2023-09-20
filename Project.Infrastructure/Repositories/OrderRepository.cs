@@ -19,6 +19,22 @@ namespace Project.Infrastructure.Repositories
         {
         }
 
+        public override async Task<PaginatedDataViewModel<Order>> GetPaginatedData(int pageNumber, int pageSize)
+        {
+            var query = _dbContext.Orders
+                .Include(c => c.Customer)
+                .Include(o => o.OrderDetails)
+                .ThenInclude(od => od.Product)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .AsNoTracking();
+
+            var data = await query.ToListAsync();
+            var totalCount = await _dbContext.Orders.CountAsync();
+
+            return new PaginatedDataViewModel<Order>(data, totalCount);
+        }
+
         public async Task<OrderViewModel> GetOrderById(int id)
         {
             // If want to use LINQ Query Syntax

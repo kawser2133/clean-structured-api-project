@@ -6,9 +6,11 @@ using Project.Core.Interfaces.IRepositories;
 using Project.Core.Interfaces.IServices;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Project.Core.Services
 {
@@ -41,10 +43,58 @@ namespace Project.Core.Services
             //Get peginated data
             var paginatedData = await _orderRepository.GetPaginatedData(pageNumber, pageSize);
 
-            //Map data with ViewModel
-            var mappedData = _orderViewModelMapper.MapList(paginatedData.Data);
+            var mappedData = new List<OrderViewModel>();
 
-            var paginatedDataViewModel = new PaginatedDataViewModel<OrderViewModel>(mappedData.ToList(), paginatedData.TotalCount);
+            //Mapping Process 1
+            mappedData.AddRange(
+                paginatedData.Data.Select(item => new OrderViewModel
+                {
+                    Id = item.Id,
+                    CustomerId = item.CustomerId,
+                    CustomerName = item?.Customer?.FullName,
+                    TotalBill = item.TotalBill,
+                    TotalQuantity = item.TotalQuantity,
+                    Description = item.Description,
+                    ProcessingData = item.ProcessingData,
+                    OrderDetails = item.OrderDetails.Select(orderDetail => new OrderDetailsViewModel
+                    {
+                        OrderId = orderDetail.Id,
+                        ProductId = orderDetail.ProductId,
+                        ProductName = orderDetail?.Product?.Name,
+                        SellingPrice = orderDetail.SellingPrice,
+                        Quantity = orderDetail.Quantity,
+                        Description = orderDetail.Description
+                    }).ToList()
+                })
+                );
+            
+
+            //Mapping Process 2
+            //foreach (var item in paginatedData.Data)
+            //{
+            //    var orderData = new OrderViewModel
+            //    {
+            //        Id = item.Id,
+            //        CustomerId = item.CustomerId,
+            //        CustomerName = item?.Customer?.FullName,
+            //        TotalBill = item.TotalBill,
+            //        TotalQuantity = item.TotalQuantity,
+            //        Description = item.Description,
+            //        ProcessingData = item.ProcessingData,
+            //        OrderDetails = item.OrderDetails.Select(orderDetail => new OrderDetailsViewModel
+            //        {
+            //            OrderId = orderDetail.Id,
+            //            ProductId = orderDetail.ProductId,
+            //            ProductName = orderDetail?.Product?.Name,
+            //            SellingPrice = orderDetail.SellingPrice,
+            //            Quantity = orderDetail.Quantity,
+            //            Description = orderDetail.Description
+            //        }).ToList()
+            //    };
+            //    mappedData.Add(orderData);
+            //}
+
+            var paginatedDataViewModel = new PaginatedDataViewModel<OrderViewModel>(mappedData, paginatedData.TotalCount);
 
             return paginatedDataViewModel;
         }
