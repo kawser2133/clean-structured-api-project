@@ -4,13 +4,14 @@ using Project.Infrastructure.Data;
 using Project.API.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using BenchmarkDotNet.Running;
+using Project.API.Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<ApplicationDbContext>(
                 options => options.UseSqlServer(builder.Configuration
                 .GetConnectionString("PrimaryDbConnection")));
-
 
 // Register ILogger service
 builder.Services.AddLogging(loggingBuilder =>
@@ -37,10 +38,27 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.MapControllers();
+app.UseRouting(); // Add this line to configure routing
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers(); // Map your regular API controllers
+
+    // Add a custom endpoint for triggering benchmarks
+    endpoints.MapGet("/runbenchmarks", async context =>
+    {
+        // You can run the benchmarks here
+        var summary = BenchmarkRunner.Run<OrderController>();
+
+        await context.Response.WriteAsync("Benchmarks completed. Check console for results.");
+    });
+});
+
 #region Custom Middleware
 
 app.UseRequestResponseLogging();
 #endregion
+
+
 
 app.Run();

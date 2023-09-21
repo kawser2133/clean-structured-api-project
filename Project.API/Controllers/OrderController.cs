@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Running;
+using Microsoft.AspNetCore.Mvc;
 using Project.Core.Entities.Business;
 using Project.Core.Interfaces.IServices;
 
@@ -6,6 +8,7 @@ namespace Project.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [MemoryDiagnoser]
     public class OrderController : ControllerBase
     {
         private readonly ILogger<OrderController> _logger;
@@ -29,7 +32,6 @@ namespace Project.API.Controllers
 
                 //Get peginated data
                 var orders = await _orderService.GetPaginatedOrders(pageNumberValue, pageSizeValue);
-
                 return Ok(orders);
             }
             catch (Exception ex)
@@ -59,12 +61,13 @@ namespace Project.API.Controllers
 
 
         // GET api/order/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
+        [HttpGet("get-value")]
+        [Benchmark]
+        public async Task<IActionResult> GetValue()
         {
             try
             {
-                var data = await _orderService.GetOrder(id);
+                var data = await _orderService.GetOrder(7);
                 return Ok(data);
             }
             catch (Exception ex)
