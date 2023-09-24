@@ -61,13 +61,13 @@ namespace Project.API.Controllers
 
 
         // GET api/order/5
-        [HttpGet("get-value")]
+        [HttpGet("{orderId}")]
         [Benchmark]
-        public async Task<IActionResult> GetValue()
+        public async Task<IActionResult> GetValue(int orderId)
         {
             try
             {
-                var data = await _orderService.GetOrder(7);
+                var data = await _orderService.GetOrder(orderId);
                 return Ok(data);
             }
             catch (Exception ex)
