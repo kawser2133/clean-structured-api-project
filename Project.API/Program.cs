@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using BenchmarkDotNet.Running;
 using Project.API.Controllers;
+using BenchmarkDotNet.Configs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -48,7 +49,7 @@ app.UseEndpoints(endpoints =>
     endpoints.MapGet("/runbenchmarks", async context =>
     {
         // You can run the benchmarks here
-        var summary = BenchmarkRunner.Run<OrderController>();
+        var summary = BenchmarkRunner.Run<OrderControllerBenchmark>();
 
         await context.Response.WriteAsync("Benchmarks completed. Check console for results.");
     });

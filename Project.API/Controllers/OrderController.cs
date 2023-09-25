@@ -62,8 +62,7 @@ namespace Project.API.Controllers
 
         // GET api/order/5
         [HttpGet("{orderId}")]
-        [Benchmark]
-        public async Task<IActionResult> GetValue(int orderId)
+        public async Task<IActionResult> Get(int orderId)
         {
             try
             {

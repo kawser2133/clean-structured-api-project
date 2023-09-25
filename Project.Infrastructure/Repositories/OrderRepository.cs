@@ -38,23 +38,23 @@ namespace Project.Infrastructure.Repositories
         public async Task<OrderViewModel> GetOrderById(int id)
         {
             // If want to use LINQ Query Syntax
-            //var query = from order in _dbContext.Orders
-            //            where order.Id == id
-            //            join customer in _dbContext.Customers on order.CustomerId equals customer.Id
-            //            join orderDetails in _dbContext.OrderDetails on order.Id equals orderDetails.OrderId
-            //            join product in _dbContext.Products on orderDetails.ProductId equals product.Id
-            //            select new { Order = order, OrderDetails = orderDetails, Product = product, Customer = customer };
+            var query = from order in _dbContext.Orders
+                        where order.Id == id
+                        join customer in _dbContext.Customers on order.CustomerId equals customer.Id
+                        join orderDetails in _dbContext.OrderDetails on order.Id equals orderDetails.OrderId
+                        join product in _dbContext.Products on orderDetails.ProductId equals product.Id
+                        select new { Order = order, OrderDetails = orderDetails, Product = product, Customer = customer };
 
-            //var result = await query.AsNoTracking().ToListAsync();
-            //var data = result.First().Order;
+            var result = await query.AsNoTracking().ToListAsync();
+            var data = result.First().Order;
             //var orderDetailsData = result;
 
             // If want to use LINQ Method Syntax
-            var data = await _dbContext.Orders.Where(x => x.Id == id)
-                .Include(c => c.Customer)
-                .Include(x => x.OrderDetails)
-                .ThenInclude(od => od.Product)
-                .FirstOrDefaultAsync();
+            //var data = await _dbContext.Orders.Where(x => x.Id == id)
+            //    .Include(c => c.Customer)
+            //    .Include(x => x.OrderDetails)
+            //    .ThenInclude(od => od.Product)
+            //    .FirstOrDefaultAsync();
 
             if (data == null)
             {
