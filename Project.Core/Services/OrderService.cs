@@ -67,7 +67,7 @@ namespace Project.Core.Services
                     }).ToList()
                 })
                 );
-            
+
 
             //Mapping Process 2
             //foreach (var item in paginatedData.Data)
@@ -99,12 +99,52 @@ namespace Project.Core.Services
             return paginatedDataViewModel;
         }
 
+        public PaginatedDataViewModel<OrderViewModel> GetPaginatedOrdersSync(int pageNumber, int pageSize)
+        {
+            //Get peginated data
+            var paginatedData = _orderRepository.GetPaginatedDataSync(pageNumber, pageSize);
+
+            var mappedData = new List<OrderViewModel>();
+
+            //Mapping Process 1
+            mappedData.AddRange(
+                paginatedData.Data.Select(item => new OrderViewModel
+                {
+                    Id = item.Id,
+                    CustomerId = item.CustomerId,
+                    CustomerName = item?.Customer?.FullName,
+                    TotalBill = item.TotalBill,
+                    TotalQuantity = item.TotalQuantity,
+                    Description = item.Description,
+                    ProcessingData = item.ProcessingData,
+                    OrderDetails = item.OrderDetails.Select(orderDetail => new OrderDetailsViewModel
+                    {
+                        OrderId = orderDetail.Id,
+                        ProductId = orderDetail.ProductId,
+                        ProductName = orderDetail?.Product?.Name,
+                        SellingPrice = orderDetail.SellingPrice,
+                        Quantity = orderDetail.Quantity,
+                        Description = orderDetail.Description
+                    }).ToList()
+                })
+                );
+
+            var paginatedDataViewModel = new PaginatedDataViewModel<OrderViewModel>(mappedData, paginatedData.TotalCount);
+
+            return paginatedDataViewModel;
+        }
+
         public async Task<OrderViewModel> GetOrder(int id)
         {
             //var orderData = await _orderRepository.GetById(id);
             //return _orderViewModelMapper.MapModel(orderData);
 
             return await _orderRepository.GetOrderById(id);
+        }
+
+        public OrderViewModel GetOrderSync(int id)
+        {
+            return _orderRepository.GetOrderByIdSync(id);
         }
 
         public async Task<bool> IsExists(string key, string value)
