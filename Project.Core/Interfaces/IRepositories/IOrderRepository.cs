@@ -11,8 +11,6 @@ namespace Project.Core.Interfaces.IRepositories
     public interface IOrderRepository : IBaseRepository<Order>
     {
         Task<PaginatedDataViewModel<Order>> GetPaginatedData(int pageNumber, int pageSize);
-        PaginatedDataViewModel<Order> GetPaginatedDataSync(int pageNumber, int pageSize);
         Task<OrderViewModel> GetOrderById(int id);
-        OrderViewModel GetOrderByIdSync(int id);
     }
 }

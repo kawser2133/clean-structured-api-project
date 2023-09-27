@@ -59,44 +59,13 @@ namespace Project.API.Controllers
 
         }
 
-        [HttpGet("sync/{orderId}")]
-        public IActionResult GetSync(int orderId)
-        {
-            try
-            {
-                var orders = _orderService.GetPaginatedOrdersSync(2, 50);
-                _logger.LogError($"1Sync-ThreadId: {Thread.CurrentThread.ManagedThreadId.ToString()}");
-                Thread.Sleep(1000);
-                _logger.LogError($"2Sync-ThreadId: {Thread.CurrentThread.ManagedThreadId.ToString()}");
-                var data = _orderService.GetOrderSync(orderId);
-                _logger.LogError($"3Sync-ThreadId: {Thread.CurrentThread.ManagedThreadId.ToString()}");
-
-                return Ok(data);
-            }
-            catch (Exception ex)
-            {
-                if (ex.Message == "No data found")
-                {
-                    return StatusCode(StatusCodes.Status404NotFound, ex.Message);
-                }
-                _logger.LogError(ex, $"An error occurred while retrieving the order");
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-            }
-        }
-
-
+        // GET: api/order/5
         [HttpGet("{orderId}")]
         public async Task<IActionResult> Get(int orderId)
         {
             try
             {
-                var orders = await _orderService.GetPaginatedOrders(2, 50);
-                _logger.LogError($"1Async-ThreadId: {Thread.CurrentThread.ManagedThreadId.ToString()}");
-                await Task.Delay(1000);
-                _logger.LogError($"2Async-ThreadId: {Thread.CurrentThread.ManagedThreadId.ToString()}");
                 var data = await _orderService.GetOrder(orderId);
-                _logger.LogError($"3Async-ThreadId: {Thread.CurrentThread.ManagedThreadId.ToString()}");
-
                 return Ok(data);
             }
             catch (Exception ex)

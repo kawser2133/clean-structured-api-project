@@ -1,16 +1,8 @@
 ﻿using Project.Core.Entities.Business;
 using Project.Core.Entities.General;
-using Project.Core.Exceptions;
 using Project.Core.Interfaces.IMapper;
 using Project.Core.Interfaces.IRepositories;
 using Project.Core.Interfaces.IServices;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Project.Core.Services
 {
@@ -99,52 +91,12 @@ namespace Project.Core.Services
             return paginatedDataViewModel;
         }
 
-        public PaginatedDataViewModel<OrderViewModel> GetPaginatedOrdersSync(int pageNumber, int pageSize)
-        {
-            //Get peginated data
-            var paginatedData = _orderRepository.GetPaginatedDataSync(pageNumber, pageSize);
-
-            var mappedData = new List<OrderViewModel>();
-
-            //Mapping Process 1
-            mappedData.AddRange(
-                paginatedData.Data.Select(item => new OrderViewModel
-                {
-                    Id = item.Id,
-                    CustomerId = item.CustomerId,
-                    CustomerName = item?.Customer?.FullName,
-                    TotalBill = item.TotalBill,
-                    TotalQuantity = item.TotalQuantity,
-                    Description = item.Description,
-                    ProcessingData = item.ProcessingData,
-                    OrderDetails = item.OrderDetails.Select(orderDetail => new OrderDetailsViewModel
-                    {
-                        OrderId = orderDetail.Id,
-                        ProductId = orderDetail.ProductId,
-                        ProductName = orderDetail?.Product?.Name,
-                        SellingPrice = orderDetail.SellingPrice,
-                        Quantity = orderDetail.Quantity,
-                        Description = orderDetail.Description
-                    }).ToList()
-                })
-                );
-
-            var paginatedDataViewModel = new PaginatedDataViewModel<OrderViewModel>(mappedData, paginatedData.TotalCount);
-
-            return paginatedDataViewModel;
-        }
-
         public async Task<OrderViewModel> GetOrder(int id)
         {
             //var orderData = await _orderRepository.GetById(id);
             //return _orderViewModelMapper.MapModel(orderData);
 
             return await _orderRepository.GetOrderById(id);
-        }
-
-        public OrderViewModel GetOrderSync(int id)
-        {
-            return _orderRepository.GetOrderByIdSync(id);
         }
 
         public async Task<bool> IsExists(string key, string value)
