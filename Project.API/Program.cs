@@ -1,13 +1,18 @@
 using Microsoft.EntityFrameworkCore;
 using Project.API.Middlewares;
 using Project.Infrastructure.Data;
-using Project.API.Extensions;
+using Project.API.Extensions; 
 
 var builder = WebApplication.CreateBuilder(args);
+// connect db SqlServer ?
+// builder.Services.AddDbContext<ApplicationDbContext>(
+//                 options => options.UseSqlServer(builder.Configuration
+//                 .GetConnectionString("PrimaryDbConnection")));
+// connect db postgresql ?
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseNpgsql(
+        builder.Configuration.GetConnectionString("PrimaryDbConnection")));
 
-builder.Services.AddDbContext<ApplicationDbContext>(
-                options => options.UseSqlServer(builder.Configuration
-                .GetConnectionString("PrimaryDbConnection")));
 
 //Register Services
 builder.Services.RegisterService();

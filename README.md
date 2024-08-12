@@ -44,6 +44,10 @@ To use this project template, follow the steps below:
 4. Build the solution to restore NuGet packages and compile the code.
 5. Configure the necessary database connection settings in the `appsettings.json` file of the Infrastructure project.
 6. Open the Package Manager Console, select `Project.Infrastructure` project, and run the `Update-Database` command to create the database.
+dotnet ef migrations add CreateIdentitySchema --project ../Project.Infrastructure --startup-project ../Project.API
+
+dotnet ef database update --project ../Project.Infrastructure --startup-project ../Project.API
+
 7. Run the application by starting the `Project.API` project.
 
 ## Project Features
